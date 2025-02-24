@@ -25,6 +25,7 @@ class dbConnector:
         results = {row[0] for row in self.cursor.fetchall()}
         return results
     
+
     def get_links_to(self, target_id):
         self.cursor.execute("""
             SELECT pl.pl_from
@@ -38,10 +39,33 @@ class dbConnector:
         results = {row[0] for row in self.cursor.fetchall()}
         return results
     
+
+    def get_id_from_title(self, title):
+        self.cursor.execute("""
+            SELECT page_id 
+            FROM page  
+            WHERE CONVERT(page_title USING utf8mb4) = %s
+        """, (title,))  # Using tuple for parameterized input
+
+        result = self.cursor.fetchone()[0]
+        return result
+    
+    def get_title_from_id(self, page_id):
+        self.cursor.execute("""
+            SELECT CONVERT(page_title USING utf8mb4) 
+            FROM page  
+            WHERE page_id = %s
+        """, (page_id,))  # Using tuple for parameterized input
+
+        result = self.cursor.fetchone()[0]
+        return result
+    
+
     # Context management: enter and exit methods
     def __enter__(self):
         # Return self to be used in the "with" block
         return self
+
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         # Close cursor and connection when exiting the "with" block

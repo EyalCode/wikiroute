@@ -4,6 +4,20 @@ from collections import deque
 
 MAX_DEPTH = 6
 
+
+def get_routes(src, target, connector):
+    src_id = connector.get_id_from_title(src)
+    target_id = connector.get_id_from_title(target)
+    routes = breadth_first_search(src_id, target_id, connector)
+    
+    # Routes to actual names
+    for route in routes:
+        for title in route:
+            title = connector.get_title_from_id(title)
+
+    return routes
+
+
 def breadth_first_search(src, target, connector):
     """Returns a list of pages of the first Route to be found, with . 
 
