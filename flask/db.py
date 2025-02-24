@@ -2,14 +2,14 @@ import mysql.connector
 
 class dbConnector:
     def __init__(self):
-        db = mysql.connector.connect(
+        self.db = mysql.connector.connect(
             host="localhost",
             user="root",
             password="yourpassword",
             database="wikidb"
         )
 
-        self.cursor = db.cursor()
+        self.cursor = self.db.cursor()
 
 
     def get_links_from(self, from_id):
@@ -22,7 +22,7 @@ class dbConnector:
         """, (from_id,))  # Using tuple for parameterized input
 
         # Fetch and return the results
-        results = self.cursor.fetchall()
+        results = {row[0] for row in self.cursor.fetchall()}
         return results
     
     def get_links_to(self, target_id):
@@ -35,7 +35,7 @@ class dbConnector:
         """, (target_id,))  # Using tuple for parameterized input
 
         # Fetch and return the results
-        results = self.cursor.fetchall()
+        results = {row[0] for row in self.cursor.fetchall()}
         return results
     
     # Context management: enter and exit methods
