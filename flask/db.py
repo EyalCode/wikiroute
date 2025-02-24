@@ -22,7 +22,7 @@ class dbConnector:
         """, (from_id,))  # Using tuple for parameterized input
 
         # Fetch and return the results
-        results = self.cursor.fetchall()
+        results = {row[0] for row in self.cursor.fetchall()}
         return results
     
     def get_links_to(self, target_id):
@@ -35,7 +35,7 @@ class dbConnector:
         """, (target_id,))  # Using tuple for parameterized input
 
         # Fetch and return the results
-        results = self.cursor.fetchall()
+        results = {row[0] for row in self.cursor.fetchall()}
         return results
     
     # Context management: enter and exit methods
