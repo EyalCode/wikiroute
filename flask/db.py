@@ -2,14 +2,14 @@ import mysql.connector
 
 class dbConnector:
     def __init__(self):
-        db = mysql.connector.connect(
-            host="localhost",
+        self.db = mysql.connector.connect(
+            host="10.10.0.3",
             user="root",
-            password="yourpassword",
+            password="E543^%lLKo16",
             database="wikidb"
         )
 
-        self.cursor = db.cursor()
+        self.cursor = self.db.cursor()
 
 
     def get_links_from(self, from_id):
