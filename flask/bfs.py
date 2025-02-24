@@ -117,8 +117,8 @@ def breadth_first_search(src, target, connector):
 def retrieve_routes(forward_routes, backward_routes, connections, src, target):
     routes = set()
     for vertex in connections:
-        backward = retrieve_backwards(backward_routes, vertex, src)
-        forward = retrieve_forward(forward_routes, vertex, target)
+        backward = retrieve_backwards(forward_routes, vertex, src)
+        forward = retrieve_forward(backward_routes, vertex, target)
         routes_to_add = { backward_route[:-1] + forward_route for backward_route in backward for forward_route in forward }
         routes.update(routes_to_add)
 
