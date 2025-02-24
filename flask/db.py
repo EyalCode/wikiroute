@@ -3,9 +3,9 @@ import mysql.connector
 class dbConnector:
     def __init__(self):
         self.db = mysql.connector.connect(
-            host="localhost",
+            host="10.10.0.3",
             user="root",
-            password="yourpassword",
+            password="E543^%lLKo16",
             database="wikidb"
         )
 
